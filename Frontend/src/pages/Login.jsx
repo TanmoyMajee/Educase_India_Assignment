@@ -5,9 +5,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    //set in local storage
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
     // clear state
     setEmail('');
     setPassword('');
