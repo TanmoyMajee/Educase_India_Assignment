@@ -24,8 +24,15 @@ const SignupForm = () => {
     // set the email and password in the local storage
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
+    // clear state
+    setEmail('');
+    setPassword('');
+    setFullName('');
+    setPhoneNumber('');
+    setCompanyName('');
+    setIsAgency(null);
     // navigate to LandingScreen
-    navigate('/');
+    navigate('/profile');
   };
 
   return (
@@ -49,7 +56,7 @@ const SignupForm = () => {
             <input
               type="text"
               id="fullName"
-              placeholder="Marry Doe"
+              placeholder="Enter your full name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -68,7 +75,7 @@ const SignupForm = () => {
             <input
               type="text"
               id="phoneNumber"
-              placeholder="Marry Doe"
+              placeholder="Enter your phone number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
@@ -87,7 +94,7 @@ const SignupForm = () => {
             <input
               type="text"
               id="email"
-              placeholder="Marry Doe"
+              placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -106,7 +113,7 @@ const SignupForm = () => {
             <input
               type="password"
               id="password"
-              placeholder="Marry Doe"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

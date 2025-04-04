@@ -10,6 +10,9 @@ const Login = () => {
     // set the email and password in the local storage
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
+    // clear state
+    setEmail('');
+    setPassword('');
     // navigate to LandingScreen
     navigate('/profile');
     console.log(email, password);
