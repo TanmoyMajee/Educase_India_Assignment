@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -6,15 +6,19 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Clear any stored data on component mount
+  useEffect(() => {
+    // This ensures we start with empty values
+    setEmail('');
+    setPassword('');
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //set in local storage
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
-    // clear state
-    setEmail('');
-    setPassword('');
-    // navigate to LandingScreen
+    // navigate to Profile page
     navigate('/profile');
     console.log(email, password);
   };
@@ -30,12 +34,13 @@ const Login = () => {
         </p>
 
         <form onSubmit={handleSubmit}>
-    
+
           <div className="relative mb-5">
             <input
               type="email"
               id="email"
-              placeholder=" Enter email address "  
+              placeholder=" Enter email address "
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="block w-full py-3 px-4 border border-gray-300 rounded-md text-sm text-gray-800  focus:outline-none focus:border-[#6a5bc1]"

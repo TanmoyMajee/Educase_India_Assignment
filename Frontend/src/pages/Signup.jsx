@@ -14,22 +14,26 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+
     // check if the email is already in the local storage
-    const SoredEmail = localStorage.getItem('email');
-    if (email && SoredEmail === email) {
+    const storedEmail = localStorage.getItem('email');
+    if (email && storedEmail === email) {
       toast.error('Email already exists');
       return;
     }
-    
-    // clear state
-    setEmail('');
-    setPassword('');
-    setFullName('');
-    setPhoneNumber('');
-    setCompanyName('');
-    setIsAgency(null);
-    // navigate to LandingScreen
+
+    // Store the user information in localStorage
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    localStorage.setItem('fullName', fullName);
+    localStorage.setItem('phoneNumber', phoneNumber);
+    localStorage.setItem('companyName', companyName);
+    localStorage.setItem('isAgency', isAgency);
+
+    // Toast success message
+    toast.success('Account created successfully!');
+
+    // navigate to Profile page
     navigate('/profile');
   };
 
@@ -37,7 +41,7 @@ const SignupForm = () => {
     <div className="flex justify-center min-h-screen bg-gray-100 p-4">
       {/* Card Container */}
       <div className="bg-white w-full max-w-sm rounded-lg shadow-md p-8">
-     
+
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Create your <br /> PopX account
         </h1>
@@ -63,7 +67,7 @@ const SignupForm = () => {
           </div>
 
           {/* Phone Number */}
-            <div className=" relative mb-7">
+          <div className=" relative mb-7">
             <label
               htmlFor="phoneNumber"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -82,7 +86,7 @@ const SignupForm = () => {
           </div>
 
           {/* Email Address */}
-            <div className=" relative mb-7">
+          <div className=" relative mb-7">
             <label
               htmlFor="email"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -101,7 +105,7 @@ const SignupForm = () => {
           </div>
 
           {/* Password */}
-            <div className=" relative mb-7">
+          <div className=" relative mb-7">
             <label
               htmlFor="password"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Camera } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,14 +6,34 @@ import { toast } from 'react-toastify';
 const ProfilePage = () => {
   // if user is not logged in, redirect to login page
   const navigate = useNavigate();
-  const email = localStorage.getItem('email');
-  
+  const [userEmail, setUserEmail] = useState('');
+
   useEffect(() => {
-    if (!email) {
+    // Get the latest email from localStorage on component mount
+    const storedEmail = localStorage.getItem('email');
+
+    if (!storedEmail) {
       toast.error('Please login to continue');
       navigate('/login');
+    } else {
+      setUserEmail(storedEmail);
     }
-  }, [email, navigate]);
+
+    // Listen for storage changes in other tabs/windows
+    const handleStorageChange = () => {
+      const newEmail = localStorage.getItem('email');
+      if (newEmail !== userEmail) {
+        setUserEmail(newEmail || '');
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Cleanup listener
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center p-4">
@@ -31,13 +51,13 @@ const ProfilePage = () => {
               className="w-16 h-16 rounded-full"
             />
             {/* Camera Icon positioned at bottom left */}
-            <div className="absolute bottom-1 left-10  ">
+            <div className="absolute bottom-1 left-10">
               <Camera className="w-5 h-5 text-gray-600 bg-white p-0.5 rounded-full" />
             </div>
           </div>
           <div className="ml-4">
             <h2 className="text-lg font-medium text-gray-800">Marry Doe</h2>
-            <p className="text-sm text-gray-600">{email}</p>
+            <p className="text-sm text-gray-600">{userEmail}</p>
           </div>
         </div>
         <hr className="border-dashed border-gray-300 mb-4" />
@@ -47,7 +67,7 @@ const ProfilePage = () => {
           Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Elitr, Sed Diam Nonumy
           Eirmod Tempor Invidunt Ut Labore Et Dolore Magna Aliquyam Erat, Sed Diam
         </p>
-        <hr className="border-dashed border-gray-300 mb-4 " />
+        <hr className="border-dashed border-gray-300 mb-4" />
       </div>
     </div>
   );
