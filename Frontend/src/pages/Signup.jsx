@@ -21,9 +21,7 @@ const SignupForm = () => {
       toast.error('Email already exists');
       return;
     }
-    // set the email and password in the local storage
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+    
     // clear state
     setEmail('');
     setPassword('');
