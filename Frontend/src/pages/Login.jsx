@@ -33,17 +33,18 @@ const Login = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
 
-        <form onSubmit={handleSubmit}>
-
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="relative mb-5">
             <input
               type="email"
               id="email"
+              name="email"
+              autoComplete="off"
               placeholder=" Enter email address "
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="block w-full py-3 px-4 border border-gray-300 rounded-md text-sm text-gray-800  focus:outline-none focus:border-[#6a5bc1]"
+              className="block w-full py-3 px-4 border border-gray-300 rounded-md text-sm text-gray-800 focus:outline-none focus:border-[#6a5bc1]"
             />
             <label
               htmlFor="email"
@@ -57,11 +58,13 @@ const Login = () => {
             <input
               type="password"
               id="password"
+              name="password"
+              autoComplete="new-password"
               placeholder=" Enter password "
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="block w-full py-3 px-4 border border-gray-300 rounded-md text-sm text-gray-800  focus:outline-none focus:border-[#6a5bc1]"
+              className="block w-full py-3 px-4 border border-gray-300 rounded-md text-sm text-gray-800 focus:outline-none focus:border-[#6a5bc1]"
             />
             <label
               htmlFor="password"

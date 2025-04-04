@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
 
 const SignupForm = () => {
   const [fullName, setFullName] = useState('');
@@ -11,6 +10,16 @@ const SignupForm = () => {
   const [companyName, setCompanyName] = useState('');
   const [isAgency, setIsAgency] = useState(null);
   const navigate = useNavigate();
+
+  // Clear form fields on component mount
+  useEffect(() => {
+    setFullName('');
+    setPhoneNumber('');
+    setEmail('');
+    setPassword('');
+    setCompanyName('');
+    setIsAgency(null);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,14 +50,13 @@ const SignupForm = () => {
     <div className="flex justify-center min-h-screen bg-gray-100 p-4">
       {/* Card Container */}
       <div className="bg-white w-full max-w-sm rounded-lg shadow-md p-8">
-
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Create your <br /> PopX account
         </h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           {/* Full Name */}
-          <div className=" relative mb-7">
+          <div className="relative mb-7">
             <label
               htmlFor="fullName"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -58,6 +66,8 @@ const SignupForm = () => {
             <input
               type="text"
               id="fullName"
+              name="full-name"
+              autoComplete="off"
               placeholder="Enter your full name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -67,7 +77,7 @@ const SignupForm = () => {
           </div>
 
           {/* Phone Number */}
-          <div className=" relative mb-7">
+          <div className="relative mb-7">
             <label
               htmlFor="phoneNumber"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -77,6 +87,8 @@ const SignupForm = () => {
             <input
               type="text"
               id="phoneNumber"
+              name="phone"
+              autoComplete="off"
               placeholder="Enter your phone number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
@@ -86,7 +98,7 @@ const SignupForm = () => {
           </div>
 
           {/* Email Address */}
-          <div className=" relative mb-7">
+          <div className="relative mb-7">
             <label
               htmlFor="email"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -94,8 +106,10 @@ const SignupForm = () => {
               Email Address <span className="text-red-500">*</span>
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
+              name="email"
+              autoComplete="off"
               placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +119,7 @@ const SignupForm = () => {
           </div>
 
           {/* Password */}
-          <div className=" relative mb-7">
+          <div className="relative mb-7">
             <label
               htmlFor="password"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -115,6 +129,8 @@ const SignupForm = () => {
             <input
               type="password"
               id="password"
+              name="new-password"
+              autoComplete="new-password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -124,7 +140,7 @@ const SignupForm = () => {
           </div>
 
           {/* Company Name */}
-          <div className=" relative mb-7">
+          <div className="relative mb-7">
             <label
               htmlFor="companyName"
               className="absolute left-6 -top-2 text-sm text-[#6a5bc1] bg-white px-3"
@@ -134,6 +150,8 @@ const SignupForm = () => {
             <input
               type="text"
               id="companyName"
+              name="company"
+              autoComplete="off"
               placeholder="Marry Doe"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
@@ -173,7 +191,6 @@ const SignupForm = () => {
                 />
                 No
               </label>
-
             </div>
           </div>
 
