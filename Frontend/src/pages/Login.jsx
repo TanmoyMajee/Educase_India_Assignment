@@ -7,9 +7,6 @@ const Login = () => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    // set the email and password in the local storage
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
     // clear state
     setEmail('');
     setPassword('');
